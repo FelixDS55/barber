@@ -1,0 +1,17 @@
+import pandas as pd
+
+# Читаем все листы Excel в виде словаря
+file_path = 'путь_к_твоему_файлу.xlsx'  # замени на путь к твоему файлу
+excel_data = pd.read_excel(file_path, sheet_name=None)
+
+# Объединяем все листы в один DataFrame и добавляем колонку с названием листа
+df_list = []
+for sheet_name, sheet_data in excel_data.items():
+    sheet_data['Лист'] = sheet_name  # добавляем колонку с именем листа
+    df_list.append(sheet_data)
+
+# Конкатенируем все данные в один DataFrame
+df = pd.concat(df_list, ignore_index=True)
+
+# Проверяем результат
+print(df.head())
